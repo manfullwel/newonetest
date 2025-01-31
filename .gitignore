@@ -1,0 +1,26 @@
+# Arquivos Excel e dados
+*.xlsx
+*.xls
+*.csv
+
+# Diretórios de saída
+output_*/
+
+# Arquivos Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ambiente virtual
+venv/
+env/
+ENV/
+
+# Logs e relatórios
+*.log
+*.json
+
+# IDEs
+.vscode/
+.idea/
+*.swp
