@@ -156,13 +156,14 @@ class AnalisadorComparativo:
         # Preparar dados de quitações
         quitacoes = self.df_quitados_jan.copy()
         
+        # Filtrar apenas os responsáveis que queremos
+        responsaveis_alvo = ['JULIO', 'LEANDRO', 'ADRIANO']
+        quitacoes = quitacoes[quitacoes['RESPONSAVEL'].isin(responsaveis_alvo)]
+        
         # Mapear responsáveis para seus grupos
         quitacoes['GRUPO'] = quitacoes['RESPONSAVEL'].map(
-            lambda x: 'LEANDRO/ADRIANO' if x in ['LEANDRO', 'ADRIANO'] else 'JULIO' if x == 'JULIO' else 'OUTROS'
+            lambda x: 'LEANDRO/ADRIANO' if x in ['LEANDRO', 'ADRIANO'] else 'JULIO'
         )
-        
-        # Filtrar apenas os grupos principais
-        quitacoes = quitacoes[quitacoes['GRUPO'].isin(['JULIO', 'LEANDRO/ADRIANO'])]
         
         # Análise por banco e grupo
         quit_banco = pd.crosstab(
