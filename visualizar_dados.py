@@ -138,16 +138,157 @@ class DemandaVisualizer:
         
         return fig
     
+    def criar_grafico_comparativo_quitacoes(self):
+        """Cria gráfico comparativo de quitações entre JULIO e LEANDRO/ADRIANO."""
+        # Carregar dados
+        df_julio = pd.read_excel(self.excel_file, sheet_name='DEMANDAS JULIO')
+        df_leandro = pd.read_excel(self.excel_file, sheet_name='DEMANDA LEANDROADRIANO')
+        df_quitados = pd.read_excel(self.excel_file, sheet_name='QUITADOS')
+        
+        # Converter datas
+        for df in [df_julio, df_leandro, df_quitados]:
+            df['DATA'] = pd.to_datetime(df['DATA'])
+            
+        # Filtrar apenas janeiro/2025
+        janeiro_2025 = lambda df: df[df['DATA'].dt.to_period('M') == pd.Period('2025-01')]
+        
+        df_julio_jan = janeiro_2025(df_julio)
+        df_leandro_jan = janeiro_2025(df_leandro)
+        df_quitados_jan = janeiro_2025(df_quitados)
+        
+        # Análise por banco
+        def contar_por_banco(df):
+            return df['BANCO'].value_counts()
+            
+        quitacoes_julio = contar_por_banco(df_julio_jan)
+        quitacoes_leandro = contar_por_banco(df_leandro_jan)
+        
+        # Criar DataFrame comparativo
+        bancos = sorted(set(quitacoes_julio.index) | set(quitacoes_leandro.index))
+        dados_comp = pd.DataFrame({
+            'JULIO': [quitacoes_julio.get(banco, 0) for banco in bancos],
+            'LEANDRO/ADRIANO': [quitacoes_leandro.get(banco, 0) for banco in bancos]
+        }, index=bancos)
+        
+        # Criar gráfico de barras agrupadas
+        fig = go.Figure()
+        
+        fig.add_trace(go.Bar(
+            name='JULIO',
+            x=bancos,
+            y=dados_comp['JULIO'],
+            marker_color=self.colors['primary']
+        ))
+        
+        fig.add_trace(go.Bar(
+            name='LEANDRO/ADRIANO',
+            x=bancos,
+            y=dados_comp['LEANDRO/ADRIANO'],
+            marker_color=self.colors['secondary']
+        ))
+        
+        fig.update_layout(
+            title='Comparativo de Demandas por Banco - Janeiro 2025',
+            xaxis_title='Banco',
+            yaxis_title='Quantidade de Demandas',
+            barmode='group',
+            xaxis_tickangle=-45,
+            showlegend=True,
+            plot_bgcolor=self.colors['background'],
+            paper_bgcolor='white',
+            height=600
+        )
+        
+        return fig
+    
+    def criar_grafico_pizza_quitacoes(self):
+        """Cria gráfico de pizza comparando total de quitações."""
+        df_quitados = pd.read_excel(self.excel_file, sheet_name='QUITADOS')
+        df_quitados['DATA'] = pd.to_datetime(df_quitados['DATA'])
+        
+        # Filtrar janeiro/2025
+        df_jan = df_quitados[df_quitados['DATA'].dt.to_period('M') == pd.Period('2025-01')]
+        
+        # Contar quitações por responsável
+        quitacoes = df_jan['RESPONSAVEL'].value_counts()
+        
+        fig = go.Figure(data=[go.Pie(
+            labels=quitacoes.index,
+            values=quitacoes.values,
+            hole=.3,
+            marker_colors=[self.colors['primary'], self.colors['secondary']]
+        )])
+        
+        fig.update_layout(
+            title='Distribuição de Quitações por Responsável - Janeiro 2025',
+            showlegend=True,
+            plot_bgcolor=self.colors['background'],
+            paper_bgcolor='white'
+        )
+        
+        return fig
+    
+    def criar_grafico_timeline_quitacoes(self):
+        """Cria gráfico de linha temporal comparando quitações diárias."""
+        # Carregar e preparar dados
+        df_julio = pd.read_excel(self.excel_file, sheet_name='DEMANDAS JULIO')
+        df_leandro = pd.read_excel(self.excel_file, sheet_name='DEMANDA LEANDROADRIANO')
+        
+        for df in [df_julio, df_leandro]:
+            df['DATA'] = pd.to_datetime(df['DATA'])
+        
+        # Filtrar janeiro/2025
+        mask_jan = lambda df: df['DATA'].dt.to_period('M') == pd.Period('2025-01')
+        df_julio_jan = df_julio[mask_jan(df_julio)]
+        df_leandro_jan = df_leandro[mask_jan(df_leandro)]
+        
+        # Contagem diária
+        contagem_julio = df_julio_jan.groupby(df_julio_jan['DATA'].dt.date).size()
+        contagem_leandro = df_leandro_jan.groupby(df_leandro_jan['DATA'].dt.date).size()
+        
+        # Criar gráfico
+        fig = go.Figure()
+        
+        fig.add_trace(go.Scatter(
+            x=contagem_julio.index,
+            y=contagem_julio.values,
+            name='JULIO',
+            mode='lines+markers',
+            line=dict(color=self.colors['primary'], width=2),
+            marker=dict(size=8)
+        ))
+        
+        fig.add_trace(go.Scatter(
+            x=contagem_leandro.index,
+            y=contagem_leandro.values,
+            name='LEANDRO/ADRIANO',
+            mode='lines+markers',
+            line=dict(color=self.colors['secondary'], width=2),
+            marker=dict(size=8)
+        ))
+        
+        fig.update_layout(
+            title='Evolução Diária de Demandas - Janeiro 2025',
+            xaxis_title='Data',
+            yaxis_title='Quantidade de Demandas',
+            showlegend=True,
+            plot_bgcolor=self.colors['background'],
+            paper_bgcolor='white',
+            height=400
+        )
+        
+        return fig
+    
     def gerar_dashboard(self, port=8050):
-        """
-        Cria um dashboard interativo com Dash.
-        """
+        """Cria um dashboard interativo com Dash."""
         app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
         
         app.layout = dbc.Container([
             html.H1("Dashboard de Análise de Demandas", 
                    className="text-center my-4"),
             
+            # Seção 1: Análise Geral
+            html.H2("Análise Geral", className="mb-3"),
             dbc.Row([
                 dbc.Col([
                     dcc.Dropdown(
@@ -171,12 +312,20 @@ class DemandaVisualizer:
                 ], md=6)
             ]),
             
+            # Seção 2: Análise Comparativa Janeiro/2025
+            html.H2("Análise Comparativa - Janeiro 2025", className="mt-5 mb-3"),
             dbc.Row([
                 dbc.Col([
-                    dcc.Graph(id='temporal-graph')
+                    dcc.Graph(id='comparativo-bancos')
+                ], md=12)
+            ]),
+            
+            dbc.Row([
+                dbc.Col([
+                    dcc.Graph(id='pizza-quitacoes')
                 ], md=6),
                 dbc.Col([
-                    dcc.Graph(id='bancos-graph')
+                    dcc.Graph(id='timeline-quitacoes')
                 ], md=6)
             ])
         ], fluid=True)
@@ -184,16 +333,18 @@ class DemandaVisualizer:
         @app.callback(
             [dash.Output('status-graph', 'figure'),
              dash.Output('problemas-graph', 'figure'),
-             dash.Output('temporal-graph', 'figure'),
-             dash.Output('bancos-graph', 'figure')],
+             dash.Output('comparativo-bancos', 'figure'),
+             dash.Output('pizza-quitacoes', 'figure'),
+             dash.Output('timeline-quitacoes', 'figure')],
             [dash.Input('aba-selector', 'value')]
         )
         def update_graphs(aba):
             return (
                 self.criar_grafico_status(aba),
                 self.criar_grafico_problemas(aba),
-                self.criar_grafico_distribuicao_temporal(aba),
-                self.criar_grafico_bancos(aba)
+                self.criar_grafico_comparativo_quitacoes(),
+                self.criar_grafico_pizza_quitacoes(),
+                self.criar_grafico_timeline_quitacoes()
             )
         
         print(f"\nIniciando dashboard na porta {port}...")
