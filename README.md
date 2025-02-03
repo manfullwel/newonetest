@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Dashboard de Equipes - Análise de Performance 📊
 
 ![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
@@ -143,3 +144,6 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 - Abra uma issue
 - Envie um email para [seu-email@exemplo.com]
 - Entre em contato via [LinkedIn](seu-linkedin)
+=======
+# newonetest
+>>>>>>> afd701fec9a5ae1c568128171676fa0af541e1a1
