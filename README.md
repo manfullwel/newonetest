@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Dashboard de Equipes - Análise de Performance 📊
 
 ![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
@@ -47,8 +46,8 @@ Um dashboard interativo para análise de performance de equipes, construído com
 1. **Instalação**:
    ```bash
    # Clone o repositório
-   git clone https://github.com/seu-usuario/dashboard-equipes.git
-   cd dashboard-equipes
+   git clone https://github.com/manfullwel/newonetest.git
+   cd newonetest
 
    # Instale as dependências
    pip install -r requirements.txt
@@ -141,9 +140,6 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ## 📞 Suporte
 
-- Abra uma issue
-- Envie um email para [seu-email@exemplo.com]
-- Entre em contato via [LinkedIn](seu-linkedin)
-=======
-# newonetest
->>>>>>> afd701fec9a5ae1c568128171676fa0af541e1a1
+- Abra uma issue no GitHub
+- Entre em contato via Telegram: [@forceManyBody](https://t.me/forceManyBody)
+- Contribua com o projeto através de Pull Requests
