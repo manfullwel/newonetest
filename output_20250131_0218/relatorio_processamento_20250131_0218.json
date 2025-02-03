@@ -1,0 +1,211 @@
+{
+  "meta": {
+    "data_processamento": "2025-01-31 02:18:22",
+    "regras_validacao": {
+      "bancos_validos": [
+        "MONEYPLUS",
+        "BRADESCO",
+        "SANTANA",
+        "GMAC",
+        "OMNI",
+        "VOLKSWAGEN",
+        "SANTANDER",
+        "C6 BANK",
+        "PSA",
+        "ITAÚ",
+        "PANAMERICANO",
+        "SINOSSERRA FINANCEIRA",
+        "HYUNDAI",
+        "RCI",
+        "BV FINANCEIRA",
+        "VW",
+        "SAFRA",
+        "RENNER",
+        "PORTO SEGURO",
+        "TOYOTA",
+        "PSA F.",
+        "HONDA"
+      ],
+      "diretores_validos": [
+        "FINALIZADO",
+        "ADRIANO",
+        "JULIO",
+        "LEANDRO",
+        "ANTUNES",
+        "PENDENTE",
+        "FECHADO",
+        "REVERSÃO",
+        "EM ANALISE"
+      ]
+    }
+  },
+  "resultados": {
+    "DEMANDAS JULIO": {
+      "total_registros": 2005,
+      "status": {
+        "AVISO": 2002,
+        "CRÍTICO": 3
+      },
+      "problemas_frequentes": {
+        "Responsável não definido": 2005,
+        "Situação não definido": 2005,
+        "Diretor não definido": 11,
+        "Banco não definido": 9,
+        "Data não definida": 3
+      },
+      "campos_vazios": {
+        "DATA": 3,
+        "RESOLUÇÃO": 7,
+        "CTT": 1,
+        "N°": 69,
+        "DEMANDA": 5,
+        "ESCRITÓRIO": 11,
+        "ATIVO/RECEPTIVO": 34,
+        "DIRETOR": 11,
+        "BANCO": 9,
+        "CÓD.": 45,
+        "RESPONSÁVEL": 38,
+        "SITUAÇÃO": 2,
+        "COLUNA_ 12": 822,
+        "PROBLEMAS": 0,
+        "STATUS": 0
+      },
+      "distribuicoes": {
+        "bancos": {
+          "BV FINANCEIRA": 411,
+          "BRADESCO": 366,
+          "SANTANDER": 316,
+          "PANAMERICANO": 288,
+          "OMNI": 191,
+          "RENNER": 152,
+          "ITAÚ": 110,
+          "SAFRA": 50,
+          "VOLKSWAGEN": 44,
+          "RCI": 29
+        },
+        "diretores": {
+          "JULIO": 1904,
+          "ANTUNES": 58,
+          "FECHADO": 13,
+          "REVERSÃO": 9,
+          "ADRIANO": 5,
+          "LEANDRO": 5
+        },
+        "status": {
+          "AVISO": 2002,
+          "CRÍTICO": 3
+        }
+      }
+    },
+    "DEMANDA LEANDROADRIANO": {
+      "total_registros": 1941,
+      "status": {
+        "AVISO": 1940,
+        "CRÍTICO": 1
+      },
+      "problemas_frequentes": {
+        "Responsável não definido": 1941,
+        "Situação não definido": 1941,
+        "Diretor não definido": 221,
+        "Banco não definido": 42,
+        "Data não definida": 1
+      },
+      "campos_vazios": {
+        "DATA": 1,
+        "RESOLUÇÃO": 9,
+        "CTT": 3,
+        "COLUNA_ 3": 22,
+        "DEMANDA": 7,
+        "ESCRITÓRIO": 32,
+        "ATIVO/RECEPTIVO": 50,
+        "DIRETOR": 221,
+        "BANCO": 42,
+        "COD": 239,
+        "RESPONSÁVEL": 53,
+        "SITUAÇÃO": 0,
+        "0": 603,
+        "PROBLEMAS": 0,
+        "STATUS": 0
+      },
+      "distribuicoes": {
+        "bancos": {
+          "BRADESCO": 392,
+          "BV FINANCEIRA": 391,
+          "PANAMERICANO": 354,
+          "SANTANDER": 312,
+          "ITAÚ": 125,
+          "RENNER": 104,
+          "OMNI": 62,
+          "VOLKSWAGEN": 60,
+          "RCI": 26,
+          "SAFRA": 23
+        },
+        "diretores": {
+          "ADRIANO": 875,
+          "LEANDRO": 735,
+          "FECHADO": 73,
+          "REVERSÃO": 18,
+          "JULIO": 13,
+          "ANTUNES": 6
+        },
+        "status": {
+          "AVISO": 1940,
+          "CRÍTICO": 1
+        }
+      }
+    },
+    "QUITADOS": {
+      "total_registros": 270,
+      "status": {
+        "AVISO": 270
+      },
+      "problemas_frequentes": {
+        "Situação não definido": 270,
+        "Responsável não definido": 72,
+        "Banco não definido": 10,
+        "Diretor não definido": 8
+      },
+      "campos_vazios": {
+        "DATA": 0,
+        "CTT": 1,
+        "COLUNA_ 2": 71,
+        "NOME": 7,
+        "SALDO DEVEDOR": 7,
+        "DESCONTO": 8,
+        "%": 15,
+        "PROCESSO": 8,
+        "CONSULTOR": 15,
+        "ESCRITÓRIO": 8,
+        "UF": 14,
+        "DIRETOR": 8,
+        "BANCO": 10,
+        "RESPONSAVEL": 72,
+        "SITUAÇÃO": 47,
+        "PROBLEMAS": 0,
+        "STATUS": 0
+      },
+      "distribuicoes": {
+        "bancos": {
+          "SANTANDER": 78,
+          "BV FINANCEIRA": 53,
+          "PANAMERICANO": 47,
+          "BRADESCO": 34,
+          "ITAÚ": 19,
+          "OMNI": 14,
+          "RENNER": 6,
+          "GMAC": 3,
+          "PSA": 2,
+          "HYUNDAI": 1
+        },
+        "diretores": {
+          "JULIO": 128,
+          "ADRIANO": 84,
+          "LEANDRO": 50
+        },
+        "status": {
+          "AVISO": 270
+        }
+      }
+    }
+  }
+}
